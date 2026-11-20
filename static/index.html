@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEYOONEEK | Next-Gen Futuristic OTT Streaming Platform</title>
+    
+    <!-- Google Fonts: Outfit & Inter for high-tech aesthetic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg viewBox='0 0 48 48' xmlns='http://www.w3.org/2000/svg'><defs><linearGradient id='g1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%2300f0ff'/><stop offset='50%25' stop-color='%238a2be2'/><stop offset='100%25' stop-color='%23ff0055'/></linearGradient></defs><polygon points='24,4 42,14 42,34 24,44 6,34 6,14' fill='%2307090e' stroke='url(%23g1)' stroke-width='2.5'/><polygon points='20,18 31,24 20,30' fill='url(%23g1)'/><circle cx='24' cy='24' r='1.5' fill='%23ffffff'/></svg>">
+</head>
+<body class="dark-theme">
+
+    <!-- Ambient Mesh Glow Background -->
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="ambient-glow glow-3"></div>
+
+    <!-- MAIN NAVBAR -->
+    <header class="navbar" id="navbar">
+        <div class="nav-left">
+            <a href="#" class="brand-logo" onclick="app.navigateCategory('all')" title="BEYOONEEK ULTRA OTT">
+                <div class="brand-insignia">
+                    <svg viewBox="0 0 48 48" class="logo-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="neonGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#00f0ff" />
+                                <stop offset="50%" stop-color="#8a2be2" />
+                                <stop offset="100%" stop-color="#ff0055" />
+                            </linearGradient>
+                            <linearGradient id="neonGradient2" x1="100%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.9" />
+                                <stop offset="100%" stop-color="#ff0055" stop-opacity="0.95" />
+                            </linearGradient>
+                        </defs>
+                        <!-- Outer Cyber Prism Hex Shield -->
+                        <polygon points="24,4 42,14 42,34 24,44 6,34 6,14" fill="#07090e" stroke="url(#neonGradient1)" stroke-width="2.5" />
+                        <!-- Inner Facet Depth -->
+                        <polygon points="24,8 38,16 38,32 24,40 10,32 10,16" fill="rgba(14, 18, 28, 0.75)" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
+                        <!-- Futuristic B Geometric Path -->
+                        <path d="M17 15H25C28 15 30.5 17 30.5 19.5C30.5 21.5 29 23 27 23.8C29.5 24.5 31.5 26.5 31.5 29C31.5 32 29 33.5 25 33.5H17V15Z" stroke="url(#neonGradient1)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+                        <!-- Inner Neon Play Beam -->
+                        <polygon points="20,19 28,24 20,29" fill="url(#neonGradient2)" />
+                        <circle cx="23.5" cy="24" r="1.5" fill="#ffffff" />
+                    </svg>
+                </div>
+                <div class="brand-text">
+                    <div class="brand-title-row">
+                        <span class="logo-title">BEY<span class="logo-aperture">O</span><span class="logo-aperture">O</span>NEEK</span>
+                        <span class="logo-sparkle"><i class="fa-solid fa-sparkles"></i></span>
+                    </div>
+                    <div class="logo-subline">
+                        <span class="subline-dot"></span>
+                        <span class="logo-badge">CINEMA ULTRA • 4K HDR</span>
+                    </div>
+                </div>
+            </a>
+            
+            <nav class="nav-links">
+                <a href="#hero" class="nav-link active" data-nav="home" onclick="app.navigateSection('home')">
+                    <i class="fa-solid fa-house"></i> Home
+                </a>
+                <a href="#trending-section" class="nav-link" data-nav="trending" onclick="app.navigateSection('trending')">
+                    <i class="fa-solid fa-fire-flame-curved"></i> Trending
+                </a>
+                <a href="#bollywood-section" class="nav-link" data-nav="bollywood" onclick="app.navigateCategory('Bollywood')">
+                    <i class="fa-solid fa-clapperboard"></i> Bollywood
+                </a>
+                <a href="#hollywood-section" class="nav-link" data-nav="hollywood" onclick="app.navigateCategory('Hollywood')">
+                    <i class="fa-solid fa-film"></i> Hollywood
+                </a>
+                <a href="#watchlist-section" class="nav-link" data-nav="watchlist" onclick="app.navigateSection('watchlist')">
+                    <i class="fa-solid fa-bookmark"></i> My List
+                </a>
+            </nav>
+        </div>
+
+        <div class="nav-right">
+            <!-- Search Bar -->
+            <div class="search-box" id="searchBox">
+                <i class="fa-solid fa-magnifying-glass search-icon" onclick="app.toggleSearch()"></i>
+                <input type="text" id="searchInput" placeholder="Search titles, actors, genres..." oninput="app.handleSearchInput(event)">
+                <i class="fa-solid fa-xmark clear-search" id="clearSearchBtn" onclick="app.clearSearch()"></i>
+            </div>
+
+            <!-- Upgrade VIP Button -->
+            <button class="btn btn-upgrade" onclick="app.openPlansModal()">
+                <i class="fa-solid fa-crown"></i>
+                <span class="upgrade-text">Upgrade Plan</span>
+            </button>
+
+            <!-- Notifications Bell -->
+            <div class="notif-bell" onclick="app.showNotificationToast('Chhaava & Dhurandhar are now streaming in 4K HDR!')">
+                <i class="fa-solid fa-bell"></i>
+                <span class="notif-dot"></span>
+            </div>
+
+            <!-- User Profile Dropdown Pill -->
+            <div class="user-profile-wrapper" id="userProfileWrapper">
+                <div class="user-pill" onclick="app.toggleUserMenu()">
+                    <div class="user-avatar" id="navAvatar">
+                        <i class="fa-solid fa-user-astronaut"></i>
+                    </div>
+                    <div class="user-meta">
+                        <span class="user-name" id="navUsername">Guest</span>
+                        <span class="plan-chip" id="navPlanChip">Free Plan</span>
+                    </div>
+                    <i class="fa-solid fa-angle-down dropdown-arrow"></i>
+                </div>
+
+                <!-- Dropdown Menu -->
+                <div class="user-dropdown-menu" id="userDropdownMenu">
+                    <div class="dropdown-header">
+                        <div class="dropdown-avatar" id="dropdownAvatar">
+                            <i class="fa-solid fa-user-astronaut"></i>
+                        </div>
+                        <div class="dropdown-user-info">
+                            <h4 id="dropdownUsername">Guest User</h4>
+                            <p id="dropdownPlanText">Standard Quality (with ads)</p>
+                        </div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <a href="javascript:void(0)" class="dropdown-item" onclick="app.openPlansModal()">
+                        <i class="fa-solid fa-gem"></i> Manage Subscription
+                    </a>
+                    <a href="#continue-section" class="dropdown-item" onclick="app.navigateSection('continue')">
+                        <i class="fa-solid fa-clock-rotate-left"></i> Continue Watching
+                    </a>
+                    <a href="#watchlist-section" class="dropdown-item" onclick="app.navigateSection('watchlist')">
+                        <i class="fa-solid fa-heart"></i> My Watchlist
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <div id="authMenuActions">
+                        <!-- Populated by JS: Login / Logout buttons -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN APP CONTENT -->
+    <main class="main-container">
+
+        <!-- DYNAMIC CINEMATIC HERO SPOTLIGHT -->
+        <section class="hero-section" id="hero">
+            <div class="hero-backdrop" id="heroBackdrop"></div>
+            <div class="hero-gradient-overlay"></div>
+            
+            <div class="hero-content">
+                <div class="hero-badges">
+                    <span class="badge badge-primary" id="heroRankBadge"><i class="fa-solid fa-ranking-star"></i> #1 IN MOVIES TODAY</span>
+                    <span class="badge badge-quality" id="heroQuality">4K ULTRA HD</span>
+                    <span class="badge badge-rating" id="heroRating"><i class="fa-solid fa-star"></i> 9.2</span>
+                    <span class="badge badge-maturity" id="heroMaturity">U/A 16+</span>
+                </div>
+
+                <h1 class="hero-title" id="heroTitle">Chhaava</h1>
+                
+                <div class="hero-meta">
+                    <span class="hero-match" id="heroMatch"><i class="fa-solid fa-bolt"></i> 99% Match</span>
+                    <span class="hero-year" id="heroYear">2025</span>
+                    <span class="hero-duration" id="heroDuration">2h 42m</span>
+                    <span class="hero-genres" id="heroGenres">Historical • Action • War • Drama</span>
+                </div>
+
+                <p class="hero-description" id="heroDesc">
+                    An epic saga chronicling the valiant life and heroic warfare of Chhatrapati Sambhaji Maharaj, son of Shivaji, as he fiercely defends the Maratha Empire against overwhelming Mughal forces.
+                </p>
+
+                <div class="hero-cast" id="heroCast">
+                    <strong>Starring:</strong> Vicky Kaushal, Rashmika Mandanna, Akshaye Khanna
+                </div>
+
+                <div class="hero-actions">
+                    <button class="btn btn-hero-play" id="heroPlayBtn" onclick="app.playHeroMovie()">
+                        <i class="fa-solid fa-play"></i> Watch Now
+                    </button>
+                    <button class="btn btn-hero-list" id="heroWatchlistBtn" onclick="app.toggleHeroWatchlist()">
+                        <i class="fa-solid fa-plus" id="heroListIcon"></i> My List
+                    </button>
+                    <button class="btn btn-hero-info" onclick="app.openHeroInfoModal()">
+                        <i class="fa-solid fa-circle-info"></i> More Details
+                    </button>
+                </div>
+            </div>
+
+            <!-- Hero Slide Controls & Sound Toggle -->
+            <div class="hero-side-controls">
+                <div class="hero-indicators" id="heroIndicators">
+                    <!-- Dynamic Dots -->
+                </div>
+                <button class="btn-sound-toggle" id="heroSoundBtn" onclick="app.toggleHeroSound()" title="Audio visualizer indicator">
+                    <i class="fa-solid fa-volume-high" id="heroSoundIcon"></i>
+                    <div class="sound-wave">
+                        <span></span><span></span><span></span><span></span>
+                    </div>
+                </button>
+            </div>
+        </section>
+
+        <!-- CATEGORY QUICK FILTER BAR -->
+        <section class="filter-strip">
+            <div class="filter-pill-container" id="filterPills">
+                <button class="filter-pill active" onclick="app.filterMovies('all', event)">All Titles</button>
+                <button class="filter-pill" onclick="app.filterMovies('trending', event)"><i class="fa-solid fa-fire"></i> Trending Now</button>
+                <button class="filter-pill" onclick="app.filterMovies('bollywood', event)">Bollywood Hits</button>
+                <button class="filter-pill" onclick="app.filterMovies('hollywood', event)">Hollywood Blockbusters</button>
+                <button class="filter-pill" onclick="app.filterMovies('action', event)">Action & Thriller</button>
+                <button class="filter-pill" onclick="app.filterMovies('scifi', event)">Sci-Fi & Fantasy</button>
+                <button class="filter-pill" onclick="app.filterMovies('drama', event)">Drama & Romance</button>
+                <button class="filter-pill" onclick="app.filterMovies('watchlist', event)"><i class="fa-solid fa-bookmark"></i> My List</button>
+            </div>
+        </section>
+
+        <!-- LIVE SEARCH RESULTS CONTAINER (Shows when searching) -->
+        <section class="movie-section search-results-section" id="searchResultsSection" style="display: none;">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fa-solid fa-magnifying-glass"></i> Search Results for "<span id="searchKeyword"></span>"
+                </h2>
+                <span class="results-count" id="resultsCount">0 titles found</span>
+            </div>
+            <div class="movies-grid" id="searchGrid">
+                <!-- Dynamically populated -->
+            </div>
+        </section>
+
+        <!-- ROW 1: CONTINUE WATCHING (F_continue_watching.py & C_dashboard.py) -->
+        <section class="movie-section" id="continue-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fa-solid fa-clock-rotate-left"></i> Continue Watching
+                </h2>
+                <div class="section-subtext">Pick up right where you left off on BEYOONEEK</div>
+            </div>
+
+            <div class="carousel-wrapper">
+                <button class="carousel-btn btn-prev" onclick="app.scrollCarousel('continueCarousel', -1)">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <div class="carousel-track" id="continueCarousel">
+                    <!-- Populated dynamically with progress bars -->
+                </div>
+                <button class="carousel-btn btn-next" onclick="app.scrollCarousel('continueCarousel', 1)">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- ROW 2: TOP 10 TRENDING BOLLYWOOD (D_trending.py) -->
+        <section class="movie-section" id="bollywood-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="gradient-text">Top 10 Trending Bollywood Movies</span> Today
+                </h2>
+                <div class="category-switch-pill" onclick="app.scrollToSection('hollywood-section')">
+                    Switch to Hollywood <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+
+            <div class="carousel-wrapper top-10-wrapper">
+                <button class="carousel-btn btn-prev" onclick="app.scrollCarousel('trendingBollywoodCarousel', -1)">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <div class="carousel-track top-10-track" id="trendingBollywoodCarousel">
+                    <!-- Populated with big stylized numbers 1-10 -->
+                </div>
+                <button class="carousel-btn btn-next" onclick="app.scrollCarousel('trendingBollywoodCarousel', 1)">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- ROW 3: TOP 10 TRENDING HOLLYWOOD (D_trending.py) -->
+        <section class="movie-section" id="hollywood-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="gradient-text-cyan">Top 10 Trending Hollywood Movies</span> Today
+                </h2>
+                <div class="category-switch-pill" onclick="app.scrollToSection('bollywood-section')">
+                    Switch to Bollywood <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+
+            <div class="carousel-wrapper top-10-wrapper">
+                <button class="carousel-btn btn-prev" onclick="app.scrollCarousel('trendingHollywoodCarousel', -1)">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <div class="carousel-track top-10-track" id="trendingHollywoodCarousel">
+                    <!-- Populated with big stylized numbers 1-10 -->
+                </div>
+                <button class="carousel-btn btn-next" onclick="app.scrollCarousel('trendingHollywoodCarousel', 1)">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- ROW 4: EXPLORE BOLLYWOOD HITS (E_explore.py) -->
+        <section class="movie-section" id="explore-bollywood-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fa-solid fa-masks-theater"></i> Explore Bollywood Blockbusters
+                </h2>
+                <span class="section-badge">CRITICALLY ACCLAIMED</span>
+            </div>
+
+            <div class="carousel-wrapper">
+                <button class="carousel-btn btn-prev" onclick="app.scrollCarousel('exploreBollywoodCarousel', -1)">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <div class="carousel-track" id="exploreBollywoodCarousel">
+                    <!-- Populated dynamically -->
+                </div>
+                <button class="carousel-btn btn-next" onclick="app.scrollCarousel('exploreBollywoodCarousel', 1)">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- ROW 5: EXPLORE HOLLYWOOD MASTERPIECES (E_explore.py) -->
+        <section class="movie-section" id="explore-hollywood-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fa-solid fa-rocket"></i> Hollywood Masterpieces & Sci-Fi Epics
+                </h2>
+                <span class="section-badge">BOX OFFICE LEGENDS</span>
+            </div>
+
+            <div class="carousel-wrapper">
+                <button class="carousel-btn btn-prev" onclick="app.scrollCarousel('exploreHollywoodCarousel', -1)">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <div class="carousel-track" id="exploreHollywoodCarousel">
+                    <!-- Populated dynamically -->
+                </div>
+                <button class="carousel-btn btn-next" onclick="app.scrollCarousel('exploreHollywoodCarousel', 1)">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- ROW 6: MY LIST / WATCHLIST -->
+        <section class="movie-section" id="watchlist-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fa-solid fa-bookmark"></i> My Watchlist
+                </h2>
+                <span class="watchlist-count" id="watchlistCount">0 titles</span>
+            </div>
+
+            <div class="carousel-wrapper">
+                <button class="carousel-btn btn-prev" onclick="app.scrollCarousel('watchlistCarousel', -1)">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <div class="carousel-track" id="watchlistCarousel">
+                    <!-- Populated dynamically -->
+                </div>
+                <button class="carousel-btn btn-next" onclick="app.scrollCarousel('watchlistCarousel', 1)">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ================= MODALS & OVERLAYS ================= -->
+
+    <!-- 1. FULLSCREEN FUTURISTIC CINEMA VIDEO PLAYER -->
+    <div class="player-modal" id="playerModal">
+        <div class="player-overlay"></div>
+        
+        <div class="player-container">
+            <!-- Simulated Free Plan Ad Banner (matches B_account_type.py Free Plan: with ads) -->
+            <div class="ad-overlay" id="adOverlay" style="display: none;">
+                <div class="ad-content">
+                    <div class="ad-tag"><i class="fa-solid fa-rectangle-ad"></i> SPONSORED ADVERTISEMENT</div>
+                    <h3>Upgrade to Beyooneek Platinum for 100% Ad-Free 4K Streaming</h3>
+                    <p>You are streaming on the Free Plan with standard quality. Upgrade to Silver, Gold or Platinum to skip ads forever!</p>
+                    <div class="ad-actions">
+                        <span class="ad-countdown" id="adCountdown">Ad will skip in 5s...</span>
+                        <button class="btn btn-skip-ad" id="skipAdBtn" onclick="app.skipAd()" disabled>Skip Ad (5)</button>
+                        <button class="btn btn-ad-upgrade" onclick="app.openPlansModal()">Upgrade Now ($10+)</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Real HTML5 Video Player -->
+            <video id="cinemaVideo" class="cinema-video" playsinline preload="auto">
+                <source id="videoSource" src="" type="video/mp4">
+                Your browser does not support HTML5 video.
+            </video>
+
+            <!-- Top Player Bar -->
+            <div class="player-top-bar" id="playerTopBar">
+                <button class="btn-player-back" onclick="app.closePlayer()">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+                <div class="player-movie-info">
+                    <h3 id="playerMovieTitle">Movie Title</h3>
+                    <div class="player-movie-meta">
+                        <span class="badge badge-quality" id="playerQualityBadge">4K ULTRA HD</span>
+                        <span id="playerMovieYear">2025</span> •
+                        <span id="playerMovieCategory">Bollywood</span> •
+                        <span id="playerActivePlan">Free Plan</span>
+                    </div>
+                </div>
+                <div class="player-top-right">
+                    <button class="btn-player-ctrl" onclick="app.toggleWatchlistFromPlayer()" title="Add to List">
+                        <i class="fa-solid fa-plus" id="playerWatchlistIcon"></i>
+                    </button>
+                    <button class="btn-player-ctrl" onclick="app.closePlayer()" title="Exit Player">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Bottom Custom Controls Bar -->
+            <div class="player-bottom-bar" id="playerBottomBar">
+                <!-- Progress Scrubber Bar -->
+                <div class="scrubber-container" id="scrubberContainer" onclick="app.handleScrubberClick(event)" onmousemove="app.handleScrubberHover(event)">
+                    <div class="scrubber-bg">
+                        <div class="scrubber-buffered" id="scrubberBuffered"></div>
+                        <div class="scrubber-progress" id="scrubberProgress">
+                            <div class="scrubber-handle"></div>
+                        </div>
+                    </div>
+                    <div class="scrubber-tooltip" id="scrubberTooltip">00:00</div>
+                </div>
+
+                <div class="player-controls-row">
+                    <div class="controls-left">
+                        <button class="btn-player-action" onclick="app.togglePlayPause()" id="playPauseBtn" title="Play/Pause">
+                            <i class="fa-solid fa-play" id="playPauseIcon"></i>
+                        </button>
+                        <button class="btn-player-action" onclick="app.seekRelative(-10)" title="Rewind 10s">
+                            <i class="fa-solid fa-rotate-left"></i> <span class="skip-text">10</span>
+                        </button>
+                        <button class="btn-player-action" onclick="app.seekRelative(10)" title="Forward 10s">
+                            <i class="fa-solid fa-rotate-right"></i> <span class="skip-text">10</span>
+                        </button>
+
+                        <!-- Volume -->
+                        <div class="volume-control">
+                            <button class="btn-player-action" onclick="app.toggleMute()" id="volumeBtn" title="Mute/Unmute">
+                                <i class="fa-solid fa-volume-high" id="volumeIcon"></i>
+                            </button>
+                            <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.05" value="1" oninput="app.setVolume(this.value)">
+                        </div>
+
+                        <!-- Time display -->
+                        <div class="player-time-display">
+                            <span id="currentTimeText">00:00</span> / <span id="totalDurationText">00:00</span>
+                        </div>
+                    </div>
+
+                    <div class="controls-right">
+                        <!-- Playback Speed -->
+                        <div class="dropdown-wrapper">
+                            <button class="btn-player-action" onclick="app.toggleSpeedMenu()" title="Playback Speed">
+                                <span id="speedBadge">1.0x</span>
+                            </button>
+                            <div class="player-menu-popover" id="speedMenu">
+                                <div class="menu-header">Playback Speed</div>
+                                <button onclick="app.setSpeed(0.5)">0.5x</button>
+                                <button onclick="app.setSpeed(0.75)">0.75x</button>
+                                <button class="active" onclick="app.setSpeed(1.0)">Normal (1.0x)</button>
+                                <button onclick="app.setSpeed(1.25)">1.25x</button>
+                                <button onclick="app.setSpeed(1.5)">1.5x</button>
+                                <button onclick="app.setSpeed(2.0)">2.0x</button>
+                            </div>
+                        </div>
+
+                        <!-- Audio & Subtitles -->
+                        <div class="dropdown-wrapper">
+                            <button class="btn-player-action" onclick="app.toggleAudioMenu()" title="Audio & Subtitles">
+                                <i class="fa-solid fa-closed-captioning"></i>
+                            </button>
+                            <div class="player-menu-popover" id="audioMenu">
+                                <div class="menu-header">Audio Language</div>
+                                <div id="audioLanguagesList"></div>
+                                <div class="menu-header" style="margin-top: 10px;">Subtitles</div>
+                                <div id="subtitlesList"></div>
+                            </div>
+                        </div>
+
+                        <!-- Video Quality Selector (Tied to subscription plan!) -->
+                        <div class="dropdown-wrapper">
+                            <button class="btn-player-action" onclick="app.toggleQualityMenu()" title="Streaming Quality">
+                                <span class="quality-badge-pill" id="qualityBadgePill">4K</span>
+                            </button>
+                            <div class="player-menu-popover" id="qualityMenu">
+                                <div class="menu-header">Streaming Resolution</div>
+                                <button class="quality-option active" id="opt4k" onclick="app.changeQuality('4K Ultra HD')">
+                                    <span>4K Ultra HD</span> <span class="plan-req-badge">Platinum</span>
+                                </button>
+                                <button class="quality-option" id="opt1080" onclick="app.changeQuality('Full HD (1080p)')">
+                                    <span>Full HD 1080p</span> <span class="plan-req-badge">Gold</span>
+                                </button>
+                                <button class="quality-option" id="opt720" onclick="app.changeQuality('HD (720p)')">
+                                    <span>HD 720p</span> <span class="plan-req-badge">Silver</span>
+                                </button>
+                                <button class="quality-option" id="opt480" onclick="app.changeQuality('Standard (480p)')">
+                                    <span>Standard 480p</span> <span class="plan-req-badge">Free</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Fullscreen -->
+                        <button class="btn-player-action" onclick="app.toggleFullscreen()" title="Toggle Fullscreen">
+                            <i class="fa-solid fa-expand" id="fullscreenIcon"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. RICH MOVIE DETAILS MODAL -->
+    <div class="modal" id="detailsModal">
+        <div class="modal-backdrop" onclick="app.closeDetailsModal()"></div>
+        <div class="modal-card modal-lg">
+            <button class="modal-close-btn" onclick="app.closeDetailsModal()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="detail-hero" id="detailHero">
+                <div class="detail-gradient"></div>
+                <div class="detail-hero-content">
+                    <h2 class="detail-title" id="detailTitle">Movie Title</h2>
+                    <div class="detail-badges">
+                        <span class="badge badge-primary" id="detailMatch">98% Match</span>
+                        <span class="badge badge-quality" id="detailQuality">4K ULTRA HD</span>
+                        <span class="badge badge-rating" id="detailRating"><i class="fa-solid fa-star"></i> 8.9</span>
+                        <span class="badge badge-maturity" id="detailMaturity">U/A 16+</span>
+                        <span id="detailYear">2025</span>
+                        <span id="detailDuration">2h 30m</span>
+                    </div>
+                    <div class="detail-actions">
+                        <button class="btn btn-hero-play" id="detailPlayBtn" onclick="app.playDetailMovie()">
+                            <i class="fa-solid fa-play"></i> Play Movie
+                        </button>
+                        <button class="btn btn-hero-list" id="detailWatchlistBtn" onclick="app.toggleDetailWatchlist()">
+                            <i class="fa-solid fa-plus" id="detailListIcon"></i> Add to List
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="detail-body">
+                <div class="detail-columns">
+                    <div class="detail-col-left">
+                        <p class="detail-desc" id="detailDesc">Movie description storyline goes here.</p>
+                        <div class="detail-audio-spec">
+                            <div><i class="fa-solid fa-language"></i> <strong>Audio:</strong> <span id="detailAudio">Hindi, English</span></div>
+                            <div><i class="fa-solid fa-closed-captioning"></i> <strong>Subtitles:</strong> <span id="detailSubtitles">English, Hindi</span></div>
+                        </div>
+                    </div>
+                    <div class="detail-col-right">
+                        <div class="meta-row"><strong>Cast:</strong> <span id="detailCast">Actors</span></div>
+                        <div class="meta-row"><strong>Director:</strong> <span id="detailDirector">Director Name</span></div>
+                        <div class="meta-row"><strong>Genres:</strong> <span id="detailGenres">Genres</span></div>
+                        <div class="meta-row"><strong>Category:</strong> <span id="detailCategory">Bollywood</span></div>
+                    </div>
+                </div>
+
+                <!-- More Like This Grid -->
+                <div class="similar-section">
+                    <h3 class="similar-heading"><i class="fa-solid fa-film"></i> More Like This</h3>
+                    <div class="similar-grid" id="similarGrid">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. SUBSCRIPTION & PAYMENT CHECKOUT MODAL (B_account_type.py) -->
+    <div class="modal" id="plansModal">
+        <div class="modal-backdrop" onclick="app.closePlansModal()"></div>
+        <div class="modal-card modal-xl">
+            <button class="modal-close-btn" onclick="app.closePlansModal()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="plans-header">
+                <span class="plan-sub-badge"><i class="fa-solid fa-gem"></i> BEYOONEEK VIP TIERS</span>
+                <h2>Choose the Streaming Plan That Fits You</h2>
+                <p>Enjoy limitless Bollywood blockbusters & Hollywood epics with crisp 4K Ultra HD, Dolby Atmos, and multi-device access.</p>
+            </div>
+
+            <!-- 4 Subscription Cards (Matches B_account_type.py) -->
+            <div class="plans-grid" id="plansGrid">
+                <!-- Card 1: Free Plan ($0) -->
+                <div class="plan-card" id="planCardFree" onclick="app.selectPlan('Free Plan', 0)">
+                    <div class="plan-popular-tag" style="display:none;">POPULAR</div>
+                    <h3 class="plan-name">Free Plan</h3>
+                    <div class="plan-price">$0 <span class="price-period">/ month</span></div>
+                    <p class="plan-tagline">Standard quality, supported with ads</p>
+                    <ul class="plan-perks">
+                        <li><i class="fa-solid fa-check"></i> Standard resolution (480p)</li>
+                        <li><i class="fa-solid fa-check"></i> Stream on 1 screen</li>
+                        <li><i class="fa-solid fa-circle-info"></i> With occasional sponsor ads</li>
+                        <li><i class="fa-solid fa-xmark perk-disabled"></i> No Dolby Atmos audio</li>
+                    </ul>
+                    <button class="btn btn-select-plan" id="btnSelectFree">Current Plan</button>
+                </div>
+
+                <!-- Card 2: Silver Plan ($10) -->
+                <div class="plan-card" id="planCardSilver" onclick="app.selectPlan('Silver Plan', 10)">
+                    <div class="plan-popular-tag" style="display:none;">POPULAR</div>
+                    <h3 class="plan-name">Silver Plan</h3>
+                    <div class="plan-price">$10 <span class="price-period">/ month</span></div>
+                    <p class="plan-tagline">High definition clarity for single screens</p>
+                    <ul class="plan-perks">
+                        <li><i class="fa-solid fa-check"></i> HD Resolution (720p / 1080p)</li>
+                        <li><i class="fa-solid fa-check"></i> 100% Ad-Free Streaming</li>
+                        <li><i class="fa-solid fa-check"></i> 1 screen active streaming</li>
+                        <li><i class="fa-solid fa-check"></i> Dolby Digital 5.1 audio</li>
+                    </ul>
+                    <button class="btn btn-select-plan" id="btnSelectSilver">Select Silver</button>
+                </div>
+
+                <!-- Card 3: Gold Plan ($15) -->
+                <div class="plan-card featured-gold" id="planCardGold" onclick="app.selectPlan('Gold Plan', 15)">
+                    <div class="plan-popular-tag">MOST POPULAR</div>
+                    <h3 class="plan-name">Gold Plan</h3>
+                    <div class="plan-price">$15 <span class="price-period">/ month</span></div>
+                    <p class="plan-tagline">Crisp Full HD streaming for couples & families</p>
+                    <ul class="plan-perks">
+                        <li><i class="fa-solid fa-check"></i> Full HD (1080p 60fps)</li>
+                        <li><i class="fa-solid fa-check"></i> 100% Ad-Free Streaming</li>
+                        <li><i class="fa-solid fa-check"></i> 2 screens simultaneous streaming</li>
+                        <li><i class="fa-solid fa-check"></i> Dolby Atmos spatial audio</li>
+                    </ul>
+                    <button class="btn btn-select-plan" id="btnSelectGold">Select Gold</button>
+                </div>
+
+                <!-- Card 4: Platinum Plan ($20) -->
+                <div class="plan-card featured-platinum" id="planCardPlatinum" onclick="app.selectPlan('Platinum Plan', 20)">
+                    <div class="plan-popular-tag">ULTRA 4K VIP</div>
+                    <h3 class="plan-name">Platinum Plan</h3>
+                    <div class="plan-price">$20 <span class="price-period">/ month</span></div>
+                    <p class="plan-tagline">The ultimate 4K HDR cinema experience</p>
+                    <ul class="plan-perks">
+                        <li><i class="fa-solid fa-check"></i> 4K Ultra HD + Dolby Vision & HDR10</li>
+                        <li><i class="fa-solid fa-check"></i> 100% Ad-Free Streaming</li>
+                        <li><i class="fa-solid fa-check"></i> 4 screens simultaneous streaming</li>
+                        <li><i class="fa-solid fa-check"></i> Spatial Dolby Atmos audio</li>
+                    </ul>
+                    <button class="btn btn-select-plan btn-platinum-glow" id="btnSelectPlatinum">Select Platinum</button>
+                </div>
+            </div>
+
+            <!-- SIMULATED PURCHASE PORTAL (Directly matching B_account_type.py) -->
+            <div class="checkout-portal" id="checkoutPortal" style="display: none;">
+                <div class="portal-header">
+                    <h3><i class="fa-solid fa-shield-halved"></i> Simulated Secure Purchase Portal</h3>
+                    <p>Completing upgrade for: <strong id="portalPlanName" class="gradient-text">Platinum Plan</strong> | Amount Due: <strong id="portalPrice">$20.00</strong></p>
+                </div>
+
+                <div class="checkout-grid">
+                    <!-- Interactive Card Preview -->
+                    <div class="card-simulation-wrapper">
+                        <div class="cyber-credit-card" id="creditCardPreview">
+                            <div class="card-chip"></div>
+                            <div class="card-brand"><i class="fa-brands fa-cc-visa"></i></div>
+                            <div class="card-number-display" id="cardDisplayNum">•••• •••• •••• 4242</div>
+                            <div class="card-bottom">
+                                <div class="card-holder-display">
+                                    <span class="card-label">CARDHOLDER</span>
+                                    <span class="card-val" id="cardDisplayHolder">BEYOONEEK VIP</span>
+                                </div>
+                                <div class="card-expiry-display">
+                                    <span class="card-label">EXPIRES</span>
+                                    <span class="card-val" id="cardDisplayExp">12/28</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Form -->
+                    <div class="payment-form">
+                        <div class="payment-methods-tabs">
+                            <button class="pm-tab active" onclick="app.setPaymentMethod('Credit Card', event)"><i class="fa-solid fa-credit-card"></i> Card</button>
+                            <button class="pm-tab" onclick="app.setPaymentMethod('UPI', event)"><i class="fa-solid fa-mobile-screen-button"></i> UPI / QR</button>
+                            <button class="pm-tab" onclick="app.setPaymentMethod('PayPal', event)"><i class="fa-brands fa-paypal"></i> PayPal</button>
+                        </div>
+
+                        <div id="cardInputs">
+                            <div class="form-group">
+                                <label>Cardholder Name</label>
+                                <input type="text" id="cardHolderInput" value="Beyooneek VIP Member" oninput="app.updateCardPreview()">
+                            </div>
+                            <div class="form-group">
+                                <label>Card Number</label>
+                                <input type="text" id="cardNumberInput" maxlength="19" value="4532 8920 1204 4242" oninput="app.updateCardPreview()">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Expiry (MM/YY)</label>
+                                    <input type="text" id="cardExpInput" maxlength="5" value="12/28" oninput="app.updateCardPreview()">
+                                </div>
+                                <div class="form-group">
+                                    <label>CVV</label>
+                                    <input type="password" id="cardCvvInput" maxlength="3" value="987">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="upiInputs" style="display: none;">
+                            <div class="form-group">
+                                <label>UPI ID (e.g. user@okaxis / user@paytm)</label>
+                                <input type="text" id="upiIdInput" value="beyooneek@upi">
+                            </div>
+                            <div class="upi-qr-mock">
+                                <i class="fa-solid fa-qrcode"></i>
+                                <span>Scan & Pay via any UPI App</span>
+                            </div>
+                        </div>
+
+                        <div class="portal-actions">
+                            <button class="btn btn-pay-now" id="payNowBtn" onclick="app.executePayment()">
+                                <i class="fa-solid fa-lock"></i> Proceed to Pay <span id="payBtnAmount">$20.00</span>
+                            </button>
+                            <button class="btn btn-cancel-pay" onclick="app.cancelPayment()">
+                                Cancel (Default to Free Plan)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. AUTH MODAL (LOGIN & REGISTER - Matching A_main.py) -->
+    <div class="modal" id="authModal">
+        <div class="modal-backdrop" onclick="app.closeAuthModal()"></div>
+        <div class="modal-card modal-sm">
+            <button class="modal-close-btn" onclick="app.closeAuthModal()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="auth-header">
+                <div class="brand-insignia" style="margin: 0 auto 12px; width: 50px; height: 50px;">
+                    <svg viewBox="0 0 48 48" class="logo-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <polygon points="24,4 42,14 42,34 24,44 6,34 6,14" fill="#07090e" stroke="url(#neonGradient1)" stroke-width="2.5" />
+                        <path d="M17 15H25C28 15 30.5 17 30.5 19.5C30.5 21.5 29 23 27 23.8C29.5 24.5 31.5 26.5 31.5 29C31.5 32 29 33.5 25 33.5H17V15Z" stroke="url(#neonGradient1)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+                        <polygon points="20,19 28,24 20,29" fill="url(#neonGradient2)" />
+                    </svg>
+                </div>
+                <h2>Welcome to BEYOONEEK</h2>
+                <p>The Ultra Modern Cinematic Streaming Experience</p>
+            </div>
+
+            <!-- Tab Switcher -->
+            <div class="auth-tabs">
+                <button class="auth-tab active" id="tabLogin" onclick="app.switchAuthTab('login')">Login</button>
+                <button class="auth-tab" id="tabRegister" onclick="app.switchAuthTab('register')">Register</button>
+            </div>
+
+            <!-- Login Form (Matches A_main.py: log()) -->
+            <form class="auth-form" id="loginForm" onsubmit="app.handleLoginSubmit(event)">
+                <div class="form-group">
+                    <label><i class="fa-solid fa-user"></i> Username</label>
+                    <input type="text" id="loginUsername" placeholder="Enter your username" required autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label><i class="fa-solid fa-key"></i> Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter your password" required autocomplete="current-password">
+                </div>
+                <button type="submit" class="btn btn-auth-submit" id="loginSubmitBtn">
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i> Login to Beyooneek
+                </button>
+                
+                <!-- Quick Demo Login Button -->
+                <div class="demo-auth-box">
+                    <span>Or test immediately with pre-loaded VIP account:</span>
+                    <button type="button" class="btn btn-demo-login" onclick="app.quickDemoLogin()">
+                        <i class="fa-solid fa-bolt"></i> 1-Click VIP Demo Login (Platinum)
+                    </button>
+                </div>
+            </form>
+
+            <!-- Register Form (Matches A_main.py: reg()) -->
+            <form class="auth-form" id="registerForm" style="display: none;" onsubmit="app.handleRegisterSubmit(event)">
+                <div class="form-group">
+                    <label><i class="fa-solid fa-user-plus"></i> Create Username</label>
+                    <input type="text" id="regUsername" placeholder="Choose a username" required autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label><i class="fa-solid fa-lock"></i> Create Password</label>
+                    <input type="password" id="regPassword" placeholder="Create your password" required autocomplete="new-password">
+                </div>
+                <div class="form-group">
+                    <label><i class="fa-solid fa-shield-check"></i> Confirm Password</label>
+                    <input type="password" id="regConfirmPassword" placeholder="Confirm your password carefully" required autocomplete="new-password">
+                </div>
+                <button type="submit" class="btn btn-auth-submit" id="regSubmitBtn">
+                    <i class="fa-solid fa-user-check"></i> Create Account
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="footer-col brand-col">
+                <div class="brand-logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                    <div class="brand-insignia">
+                        <svg viewBox="0 0 48 48" class="logo-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <polygon points="24,4 42,14 42,34 24,44 6,34 6,14" fill="#07090e" stroke="url(#neonGradient1)" stroke-width="2.5" />
+                            <path d="M17 15H25C28 15 30.5 17 30.5 19.5C30.5 21.5 29 23 27 23.8C29.5 24.5 31.5 26.5 31.5 29C31.5 32 29 33.5 25 33.5H17V15Z" stroke="url(#neonGradient1)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+                            <polygon points="20,19 28,24 20,29" fill="url(#neonGradient2)" />
+                        </svg>
+                    </div>
+                    <div class="brand-text">
+                        <div class="brand-title-row">
+                            <span class="logo-title" style="font-size: 1.35rem;">BEY<span class="logo-aperture">O</span><span class="logo-aperture">O</span>NEEK</span>
+                        </div>
+                        <div class="logo-subline">
+                            <span class="subline-dot"></span>
+                            <span class="logo-badge">CINEMA ULTRA • 4K HDR</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="footer-desc">
+                    A cutting-edge, next-generation streaming entertainment portal combining high performance FastAPI microservices, relational SQLite/SQLAlchemy schemas, and a futuristic glassmorphic cinema UI.
+                </p>
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="#hero">Home Spotlight</a></li>
+                    <li><a href="#bollywood-section">Trending Bollywood</a></li>
+                    <li><a href="#hollywood-section">Trending Hollywood</a></li>
+                    <li><a href="#explore-bollywood-section">Bollywood Catalog</a></li>
+                    <li><a href="#explore-hollywood-section">Hollywood Catalog</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Subscription Plans</h4>
+                <ul>
+                    <li><a href="javascript:void(0)" onclick="app.openPlansModal()">Free Plan ($0)</a></li>
+                    <li><a href="javascript:void(0)" onclick="app.openPlansModal()">Silver Plan ($10)</a></li>
+                    <li><a href="javascript:void(0)" onclick="app.openPlansModal()">Gold Plan ($15)</a></li>
+                    <li><a href="javascript:void(0)" onclick="app.openPlansModal()">Platinum Plan ($20)</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>System Architecture</h4>
+                <div class="tech-badge-list">
+                    <span class="tech-badge"><i class="fa-brands fa-python"></i> Python 3.13</span>
+                    <span class="tech-badge"><i class="fa-solid fa-bolt"></i> FastAPI</span>
+                    <span class="tech-badge"><i class="fa-solid fa-database"></i> SQLite & SQLAlchemy</span>
+                    <span class="tech-badge"><i class="fa-brands fa-html5"></i> HTML5 Video API</span>
+                    <span class="tech-badge"><i class="fa-brands fa-css3-alt"></i> Modern CSS Glassmorphism</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 BEYOONEEK OTT PLATFORM. All rights reserved. Designed for ultra-lucrative, eye-friendly cinema streaming.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
