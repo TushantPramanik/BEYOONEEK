@@ -639,8 +639,12 @@ class BeyooneekApp {
 
     playHeroMovie() {
         this.playUiSound("click");
-        const movie = this.heroMovies[this.currentHeroIndex];
-        if (movie) this.playMovie(movie);
+        const movie = this.heroMovies && this.heroMovies.length > 0 ? this.heroMovies[this.currentHeroIndex] : null;
+        if (movie) {
+            this.playMovie(movie);
+        } else {
+            this.playMovieById(1);
+        }
     }
 
     async toggleHeroWatchlist() {
@@ -976,48 +980,94 @@ class BeyooneekApp {
                 this.playMovie(data.movie, resumeSeconds);
             }
         } catch (e) {
-            console.error(e);
+            console.error("Failed to fetch and play movie:", movieId, e);
         }
     }
 
     playMovie(movie, resumeSeconds = 0) {
+        if (!movie) {
+            console.warn("playMovie was invoked without a valid movie payload.");
+            return;
+        }
+
         this.playUiSound("click");
         this.activeMovie = movie;
 
+        // Cleanly close details modal if open so player has full focus
+        const detailsModal = document.getElementById("detailsModal");
+        if (detailsModal) detailsModal.classList.remove("active");
+        this.activeModalMovie = null;
+
         const modal = document.getElementById("playerModal");
-        modal.classList.add("active");
+        if (modal) modal.classList.add("active");
         this.showPlayerControls();
 
-        // Set Top bar info
-        document.getElementById("playerMovieTitle").textContent = movie.title;
-        document.getElementById("playerMovieYear").textContent = movie.year;
-        document.getElementById("playerMovieCategory").textContent = movie.category;
+        // Update Top Bar movie info dynamically to match selected movie
+        const titleEl = document.getElementById("playerMovieTitle");
+        if (titleEl) titleEl.textContent = movie.title || "Movie Title";
+
+        const yearEl = document.getElementById("playerMovieYear");
+        if (yearEl) yearEl.textContent = movie.year || "2025";
+
+        const catEl = document.getElementById("playerMovieCategory");
+        if (catEl) catEl.textContent = movie.category || "Cinema";
+
+        const qualityBadge = document.getElementById("playerQualityBadge");
+        if (qualityBadge) qualityBadge.textContent = movie.quality || "4K ULTRA HD";
+
+        const watchIcon = document.getElementById("playerWatchlistIcon");
+        if (watchIcon) {
+            const inList = this.watchlist.has(movie.id);
+            watchIcon.className = inList ? "fa-solid fa-check" : "fa-solid fa-plus";
+        }
         
         const userPlan = this.currentUser ? this.currentUser.plan_name : "Free Plan";
-        document.getElementById("playerActivePlan").textContent = userPlan;
+        const planEl = document.getElementById("playerActivePlan");
+        if (planEl) planEl.textContent = userPlan;
+
+        // Visual toast notification confirming the movie currently streaming
+        this.showNotificationToast(`Now Streaming: ${movie.title}`);
 
         // Check if user is on Free Plan -> show simulated 5s ad overlay (matching B_account_type.py)
         if (userPlan.toLowerCase().includes("free")) {
             this.showSimulatedAd();
         } else {
-            document.getElementById("adOverlay").style.display = "none";
+            const adOverlay = document.getElementById("adOverlay");
+            if (adOverlay) adOverlay.style.display = "none";
         }
 
-        // Set Video Source directly on video element for rock-solid playback across all engines
-        const streamUrl = movie.video_url || "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4";
-        this.videoEl.src = streamUrl;
-        const source = document.getElementById("videoSource");
-        if (source) source.src = streamUrl;
-        this.videoEl.load();
+        // 3 standard demo videos distributed across all movies in alternate pattern
+        const demoVideos = [
+            "/static/videos/trailer_oceans.mp4",
+            "/static/videos/demo.mp4",
+            "/static/videos/flower.mp4"
+        ];
+        const defaultStream = movie.id ? demoVideos[(movie.id - 1) % demoVideos.length] : demoVideos[0];
+        const streamUrl = movie.video_url || defaultStream;
 
-        if (resumeSeconds > 0) {
-            this.videoEl.currentTime = resumeSeconds;
-            this.showNotificationToast(`Resuming stream from ${this.formatTime(resumeSeconds)}`);
-        } else {
-            this.videoEl.currentTime = 0;
+        if (!this.videoEl) {
+            this.videoEl = document.getElementById("cinemaVideo");
         }
 
-        this.videoEl.play().catch(e => console.warn("Auto-play prevented", e));
+        if (this.videoEl) {
+            this.videoEl.pause();
+            this.videoEl.src = streamUrl;
+            const source = document.getElementById("videoSource");
+            if (source) source.src = streamUrl;
+            this.videoEl.load();
+
+            if (resumeSeconds > 0) {
+                this.videoEl.currentTime = resumeSeconds;
+                this.showNotificationToast(`Resuming stream from ${this.formatTime(resumeSeconds)}`);
+            } else {
+                this.videoEl.currentTime = 0;
+            }
+
+            const playPromise = this.videoEl.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(e => console.warn("Auto-play prevented", e));
+            }
+        }
 
         // Start Periodic Progress Tracking (every 5 seconds)
         this.startProgressTracking();
@@ -1337,7 +1387,7 @@ class BeyooneekApp {
                 item.innerHTML = `
                     <div class="similar-thumb-wrap">
                         <img class="similar-thumb" src="${sim.backdrop_url || sim.poster_url}" alt="${sim.title}" onerror="this.src='https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400'">
-                        <div class="similar-play-hover">
+                        <div class="similar-play-hover" onclick="event.stopPropagation(); app.playMovieById(${sim.id})" title="Stream Now">
                             <i class="fa-solid fa-play"></i>
                         </div>
                         <span class="similar-badge-quality">${sim.quality ? sim.quality.split(" ")[0] : "4K"}</span>
@@ -1366,8 +1416,9 @@ class BeyooneekApp {
 
     playDetailMovie() {
         if (this.activeModalMovie) {
+            const movieToPlay = this.activeModalMovie;
             this.closeDetailsModal();
-            this.playMovie(this.activeModalMovie);
+            this.playMovie(movieToPlay);
         }
     }
 
